@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <RelativeLayout
+        android:id="@+id/baseRL1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/bottomradius">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/logoapp"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m1"
+        android:layout_centerInParent="true"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardBackgroundColor="@color/white"
+        app:strokeColor="@color/white"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/m2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:fontFamily="@font/lilita_one"
+                android:textSize="28sp"
+                android:textColor="@color/birulangit"
+                android:textAlignment="center"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m1"
+                android:layout_marginEnd="@dimen/m1"
+                android:layout_marginBottom="@dimen/md3"
+                android:hint="Nama"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKatsan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tilNama"
+                android:layout_marginStart="@dimen/m1"
+                android:layout_marginEnd="@dimen/m1"
+                android:layout_marginBottom="@dimen/md3"
+                android:hint="Kata Sandi"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tilKatsan"
+                android:layout_marginStart="@dimen/m1"
+                android:layout_marginEnd="@dimen/m1"
+                android:backgroundTint="#013C85"
+                android:text="Masuk" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Beluxe Laundry - Belia 2023"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/m1"
+        android:gravity="center"/>
+</RelativeLayout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/m1"
+            android:background="@drawable/logoapp"
+            android:scaleType="fitCenter" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/m1"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:useDefaultMargins="true">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnReguler"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:strokeWidth="0dp"
+                android:layout_row="0"
+                android:layout_column="0">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/cucireguler"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:background="@color/birumuda"
+                    android:fontFamily="@font/lilita_one"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="Laundry Reguler"
+                    android:textColor="@color/blue" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnPremium"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:strokeWidth="0dp"
+                android:layout_row="0"
+                android:layout_column="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/mesincuci"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:background="@color/birumuda"
+                    android:fontFamily="@font/lilita_one"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="Laundry Premium"
+                    android:textColor="@color/blue" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:strokeWidth="0dp"
+                android:layout_row="1"
+                android:layout_column="0">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/pricelist"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:background="@color/birumuda"
+                    android:fontFamily="@font/lilita_one"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="Daftar Harga"
+                    android:textColor="@color/blue" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:strokeWidth="0dp"
+                android:layout_row="1"
+                android:layout_column="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/about"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:background="@color/birumuda"
+                    android:fontFamily="@font/lilita_one"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="Tentang Beluxe"
+                    android:textColor="@color/blue" />
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m1"
+            android:fontFamily="@font/lilita_one"
+            android:text="Pesananku"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/m1"
+
+            tools:listitem="@layout/listorder" />
+    </LinearLayout>
+</LinearLayout>

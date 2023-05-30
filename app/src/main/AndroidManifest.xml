@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Beluxe"
         tools:targetApi="31">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HargaActivity"
+            android:exported="false" />
+        <activity
             android:name=".AboutActivity"
             android:exported="false" />
         <activity
@@ -27,7 +33,7 @@
             android:name=".RegulerActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

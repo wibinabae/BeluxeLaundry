@@ -81,6 +81,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/daftarHarga"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 app:strokeWidth="0dp"
@@ -106,6 +107,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/aboutMe"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 app:strokeWidth="0dp"

@@ -45,8 +45,11 @@ public class AboutActivity extends AppCompatActivity {
         openGithub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Intent gthb = new Intent();
+                gthb.setAction(Intent.ACTION_VIEW);
+                gthb.addCategory(Intent.CATEGORY_BROWSABLE);
+                gthb.setData(Uri.parse("https://github.com/beliarizki26"));
+                startActivity(gthb);
             }
         });
 

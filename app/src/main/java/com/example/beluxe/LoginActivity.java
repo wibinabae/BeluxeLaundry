@@ -20,6 +20,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        DatabaseHelper db = new DatabaseHelper(getBaseContext());
+
+        //inserting data into table login for auth
+        db.insertLogin("belia", "asd");
+        db.insertLogin("admin", "admin");
 
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -37,14 +42,17 @@ public class LoginActivity extends AppCompatActivity {
                     // Lakukan logika autentikasi Anda di sini
                     // Misalnya, memeriksa apakah username dan password valid
 
-                    if (username.equals("belia") && password.equals("asd")) {
-                        // Autentikasi berhasil, lakukan tindakan selanjutnya
-                        Toast.makeText(LoginActivity.this, "Berhasil Masuk", Toast.LENGTH_SHORT).show();
+                    // Check if the username and password are correct
+                    boolean isAuthenticated = db.checkLogin(username, password);
+
+                    if (isAuthenticated) {
+                        // Redirect the user to the main activity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+                        Toast.makeText(LoginActivity.this, "Selamat Datang " + username, Toast.LENGTH_SHORT).show();
                     } else {
-                        // Autentikasi gagal, tampilkan pesan kesalahan
-                        Toast.makeText(LoginActivity.this, "Nama dan Kata Sandi Salah", Toast.LENGTH_SHORT).show();
+                        // Show an error message
+                        Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

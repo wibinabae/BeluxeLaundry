@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Beluxe</string>
-    <string name="about_identity">Hay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia RizkyHay Nama saya Belia Rizky</string>
+    <string name="about_identity">Halo, Saya Belia Rizki Nurapriyani. Ini adalah tugas project akhir saya, disini saya membuat aplikasi laundry dengan nama Beluxe Laundry, di dalam aplikasi ini admin dapat login untuk nantinya mengelola data klien yang menggunakan jasa laundry kami. Terdapat beberapa pilihan menu, diantaranya adalah Laundry Reguler, Laundry Premium, Daftar Harga, dan Tentang Beluxe. Aplikasi ini dibangun dengan menggunakan Android Studio, untuk tampilan disini saya menggunakan Material Design 3, dan menggunakan SQLite untuk sebagai database lokal. </string>
 </resources>

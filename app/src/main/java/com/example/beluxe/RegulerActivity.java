@@ -43,13 +43,13 @@ public class RegulerActivity extends AppCompatActivity {
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertData(txtNama.getText().toString(),
+                boolean isInserted = myDb.insertDataLaundry(txtNama.getText().toString(),
                         txtKilo.getText().toString(),
                         txtHarga.getText().toString());
                 if (isInserted == true)
-                    Toast.makeText(RegulerActivity.this, "Data Iserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegulerActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(RegulerActivity.this, "Data Not Iserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegulerActivity.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
             }
         });
 

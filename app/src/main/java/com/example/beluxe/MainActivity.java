@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beluxe.Person;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +25,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView list = findViewById(R.id.list);
-        ListAdapter adapter = new ListAdapter(this, createPersons());
+        DatabaseHelper db = new DatabaseHelper(this);
+        List data = db.getAllLaundry();
+        ListAdapter adapter = new ListAdapter(this, data);
+
+
+
+
 
         //set adapter pada list view.
         list.setAdapter(adapter);
@@ -63,21 +71,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private List<Person> createPersons() {
-        List<Person> data = new ArrayList<>();
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        data.add(new Person("Rizky", "8 Kilo"));
-        data.add(new Person("Apriyani", "10 Kilo"));
-        return data;
-    }
+//    private List<Person> createPersons() {
+//        ArrayList<Person> data = new ArrayList<>();
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        data.add(new Person("Rizky", "8 Kilo"));
+//        data.add(new Person("Apriyani", "10 Kilo"));
+//        return data;
+//    }
 
 }

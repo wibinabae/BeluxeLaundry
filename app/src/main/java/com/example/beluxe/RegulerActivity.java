@@ -4,8 +4,15 @@ package com.example.beluxe;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +21,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class RegulerActivity extends AppCompatActivity {
 
@@ -34,7 +44,61 @@ public class RegulerActivity extends AppCompatActivity {
         txtKilo = findViewById(R.id.textKiloan);
         txtHarga = findViewById(R.id.textHarga);
         btnAddData = findViewById(R.id.btnAdd);
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
+        String[] items = new String[]{"Beluxe Reguler", "Beluxe Reguler++", "Beluxe Clean", "Beluxe Fast", "Beluxe Clean and Fast", "Beluxe Express+", "Beluxe Express++"};
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, items);
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                int convKilo = Integer.parseInt(txtKilo.getText().toString());
+                if (selectedItem.equals("Beluxe Reguler")) {
+                    int hasil = convKilo * 10000;
+                    txtHarga.setText("" + hasil);
+                } else if (selectedItem.equals("Beluxe Reguler++")) {
+                    int hasil = convKilo * 20000;
+                    txtHarga.setText("" + hasil);
+                } else if (selectedItem.equals("Beluxe Clean")) {
+                    int hasil = convKilo * 30000;
+                    txtHarga.setText("" + hasil);
+                }
+            }
+        });
+        txtHarga.addTextChangedListener(new TextWatcher() {
+            private String current = "";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals(current)) {
+                    txtHarga.removeTextChangedListener(this);
+
+                    String cleanString = s.toString().replaceAll("[Rp,.\\s]", "");
+                    double parsed = Double.parseDouble(cleanString);
+                    NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    formatter.setMaximumFractionDigits(0); // Jika ingin menghilangkan digit desimal
+                    String formatted = formatter.format(parsed);
+
+                    current = formatted;
+                    txtHarga.setText(formatted);
+                    txtHarga.setSelection(formatted.length());
+
+                    txtHarga.addTextChangedListener(this);
+                }
+            }
+        });
 //        AddData();
 //        viewAll();
 //        UpdateData();
@@ -47,85 +111,37 @@ public class RegulerActivity extends AppCompatActivity {
                         txtKilo.getText().toString(),
                         txtHarga.getText().toString());
                 if (isInserted == true)
-                    Toast.makeText(RegulerActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                    showMessage("Berhasil", "Data Berhasil Di Simpan");
                 else
-                    Toast.makeText(RegulerActivity.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
+                    showMessage("Gagal", "Data Gagal Di Simpan");
+
+                txtNama.setText("");
+                txtHarga.setText("0");
+                txtKilo.setText("0");
+                autoCompleteTextView.setText("Pilih Paket");
             }
         });
 
     }
 
-//    public void deleteData() {
-//        btnDelete.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Integer deletedRows = myDb.deleteData(editTextId.getText().toString());
-//                        if (deletedRows > 0)
-//                            Toast.makeText(RegulerActivity.this, "Data Deleted", Toast.LENGTH_LONG).show();
-//                        else
-//                            Toast.makeText(RegulerActivity.this, "Data Failed to Deleted!", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
-//    }
-//
-//    //fungsi update
-//    public void UpdateData() {
-//        btnUpdate.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        boolean isUpdate = myDb.updateData(editTextId.getText().toString(),
-//                                txtNama.getText().toString(),
-//                                txtKilo.getText().toString(),
-//                                txtHarga.getText().toString());
-//                        if (isUpdate == true)
-//                            Toast.makeText(RegulerActivity.this, "Data Updated", Toast.LENGTH_LONG).show();
-//                        else
-//                            Toast.makeText(RegulerActivity.this, "Data Failed to Update", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
-//    }
-//
-//    //fungsi tambah
-//    public void AddData() {
-//
-//    }
-//    //fungsi menampilkan data
-//
-//    public void viewAll() {
-//        btnViewAll.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Cursor res = myDb.getAllData();
-//                        if (res.getCount() == 0) {
-//                            // show message
-//                            showMessage("Error", "Noting Found");
-//                            return;
-//                        }
-//                        StringBuffer buffer = new StringBuffer();
-//                        while (res.moveToNext()) {
-//                            buffer.append("Id :" + res.getString(0) + "\n");
-//                            buffer.append("Nama :" + res.getString(1) + "\n");
-//                            buffer.append("Kilo :" + res.getString(2) + "\n");
-//                            buffer.append("Harga :" + res.getString(3) + "\n\n");
-//                        }
-//                        // show all data
-//                        showMessage("Data", buffer.toString());
-//                    }
-//                }
-//        );
-//    }
-//
-//    //membuat alert dialog
-//    public void showMessage(String title, String Message) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setCancelable(true);
-//        builder.setTitle(title);
-//        builder.setMessage(Message);
-//        builder.show();
-//    }
+
+    //membuat alert dialog
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.setIcon(R.drawable.logoapp);
+        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

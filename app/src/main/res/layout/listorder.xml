@@ -6,6 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
+    android:backgroundTint="@color/white"
+    android:elevation="@dimen/cardview_default_elevation"
+    android:layout_margin="@dimen/md3"
     android:orientation="vertical">
 
 <!--    <com.google.android.material.card.MaterialCardView-->

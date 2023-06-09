@@ -1,15 +1,19 @@
 package com.example.beluxe;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.beluxe.Person;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -24,14 +28,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+
         ListView list = findViewById(R.id.list);
         DatabaseHelper db = new DatabaseHelper(this);
         List data = db.getAllLaundry();
         ListAdapter adapter = new ListAdapter(this, data);
-
-
-
-
 
         //set adapter pada list view.
         list.setAdapter(adapter);
@@ -69,23 +72,41 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Logika refresh di sini
+
+                // Setelah selesai, panggil method setRefreshing(false) untuk menghentikan animasi refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Apa yang akan dilakukan?")
+                        .setMessage("Apa yang akan kamu lakukan untuk data ini?" + item.toString())
+                        .setIcon(R.drawable.logoapp);
+                builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, RegulerActivity.class);
+                        intent.putExtra("data", item.toString());
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Hapus Datana
+                    }
+                });
+            }
+        });
+
     }
-
-//    private List<Person> createPersons() {
-//        ArrayList<Person> data = new ArrayList<>();
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        data.add(new Person("Rizky", "8 Kilo"));
-//        data.add(new Person("Apriyani", "10 Kilo"));
-//        return data;
-//    }
-
 }

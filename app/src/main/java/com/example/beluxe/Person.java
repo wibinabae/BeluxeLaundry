@@ -8,7 +8,6 @@ public class Person {
 
         this.namana = nama;
         this.kiloan = kilo;
-
     }
 
     public String getNamana() {
@@ -26,8 +25,6 @@ public class Person {
     public void setKilo(String kilo) {
         this.kiloan = kilo;
     }
-
-
 
 
 }

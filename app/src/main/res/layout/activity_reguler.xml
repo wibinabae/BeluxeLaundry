@@ -21,22 +21,21 @@
     </androidx.cardview.widget.CardView>
 
 
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="@dimen/md3"-->
+<!--        android:hint="ID Pesanan">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/textID"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:editable="false" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/md3"
-        android:hint="ID Pesanan">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/md3"
@@ -50,8 +49,8 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
 
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/md3"
@@ -63,16 +62,31 @@
             android:id="@+id/textKiloan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/isiKilo"
             android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/md3"
-        app:prefixText="Rp "
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/m2"
+            android:hint="Pilih Paket"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/md3"
         app:endIconMode="clear_text"
         android:hint="Harga">
 
@@ -80,7 +94,9 @@
             android:id="@+id/textHarga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:hint="@string/hargalaundry"
+            android:inputType="number"
+            android:editable="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -27,12 +28,13 @@ import java.util.Locale;
 
 public class RegulerActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
+    DatabaseHelper myDb = new DatabaseHelper(this);
     private TextInputEditText txtNama, txtKilo, txtHarga, editTextId;
     Button btnAddData;
-    Button btnViewAll;
-    Button btnUpdate;
-    Button btnDelete;
+    private String nama, harga, kilo, id;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,14 @@ public class RegulerActivity extends AppCompatActivity {
         btnAddData = findViewById(R.id.btnAdd);
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         String[] items = new String[]{"Beluxe Reguler", "Beluxe Reguler++", "Beluxe Clean", "Beluxe Fast", "Beluxe Clean and Fast", "Beluxe Express+", "Beluxe Express++"};
+
+
+        //menerima data dari MainActivity
+        id = getIntent().getStringExtra("id");
+        nama = getIntent().getStringExtra("nama");
+        kilo = getIntent().getStringExtra("kilo");
+        harga = getIntent().getStringExtra("harga");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, items);
@@ -107,18 +117,26 @@ public class RegulerActivity extends AppCompatActivity {
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertDataLaundry(txtNama.getText().toString(),
-                        txtKilo.getText().toString(),
-                        txtHarga.getText().toString());
-                if (isInserted == true)
-                    showMessage("Berhasil", "Data Berhasil Di Simpan");
-                else
-                    showMessage("Gagal", "Data Gagal Di Simpan");
+               try {
+                   if (id == null || id.equals("")) {
+                       boolean isInserted = myDb.insertDataLaundry(txtNama.getText().toString(),
+                               txtKilo.getText().toString(),
+                               txtHarga.getText().toString());
+                       if (isInserted == true)
+                           showMessage("Berhasil", "Data Berhasil Di Simpan");
+                       else
+                           showMessage("Gagal", "Data Gagal Di Simpan");
 
-                txtNama.setText("");
-                txtHarga.setText("0");
-                txtKilo.setText("0");
-                autoCompleteTextView.setText("Pilih Paket");
+                       txtNama.setText("");
+                       txtHarga.setText("0");
+                       txtKilo.setText("0");
+                       autoCompleteTextView.setText("Pilih Paket");
+                   } else {
+                       myDb.updateLaundry(Integer.parseInt(id), txtNama.getText().toString(), txtHarga.getText().toString(), txtKilo.getText().toString());
+                   }
+               } catch (Exception e) {
+                   Log.e("Menyimpan",e.getMessage());
+               }
             }
         });
 

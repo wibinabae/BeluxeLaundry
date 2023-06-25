@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -118,23 +119,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public ArrayList<Person> getAllLaundry() {
-        ArrayList<Person> laundryList = new ArrayList<>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + laundryNameTable, null);
-
-        if (cursor.moveToFirst()) {
+    public ArrayList<HashMap<String, String>> getAllLaundry() {
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        String query = "SELECT * FROM " + laundryNameTable;
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToNext()) {
             do {
-                laundryList.add(new Person(
-                        cursor.getString(1),
-                        cursor.getString(2)
-                ));
-            } while(cursor.moveToNext());
+                HashMap<String, String> map = new HashMap<>();
+                map.put("id", cursor.getString(0));
+                map.put("nama", cursor.getString(1));
+                map.put("kilo", cursor.getString(2));
+                map.put("harga", cursor.getString(3));
+                list.add(map);
+            } while (cursor.moveToNext());
         }
         cursor.close();
-        return laundryList;
+        return list;
     }
 
     public void deleteLaundry(int id) {
@@ -144,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
     }
 
-    public int updateLaundry(int id, String nama, float harga, float kilo) {
+    public int updateLaundry(int id, String nama, String harga, String kilo) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();

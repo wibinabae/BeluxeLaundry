@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listView = findViewById(R.id.list);
+        db = new DatabaseHelper(getApplicationContext());
+
+        adapter = new Adapter(MainActivity.this, list);
+
+        //set adapter pada list view.
+        listView.setAdapter(adapter);
+
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         com.google.android.material.card.MaterialCardView mcdReguler = findViewById(R.id.btnReguler);
         com.google.android.material.card.MaterialCardView mcdPremium = findViewById(R.id.btnPremium);
@@ -82,13 +90,40 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        listView = findViewById(R.id.list);
-        db = new DatabaseHelper(getApplicationContext());
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Object item = parent.getItemAtPosition(position);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                builder.setTitle("Apa yang akan dilakukan?")
+//                        .setMessage("Apa yang akan kamu lakukan untuk data ini?" + item.toString())
+//                        .setIcon(R.drawable.logoapp);
+//                builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = new Intent(MainActivity.this, RegulerActivity.class);
+//                        intent.putExtra("data", item.toString());
+//                        startActivity(intent);
+//                    }
+//                });
+//                builder.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // Hapus Data
+//                    }
+//                });
+//            }
+//        });
+//    }
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedItem = (String) parent.getItemAtPosition(position);
+//                showItemDialog(selectedItem);
+//            }
+//        });
+//    }
 
-        adapter = new Adapter(MainActivity.this, list);
-
-        //set adapter pada list view.
-        listView.setAdapter(adapter);
 
 //        Handling untuk mengedit dan menghapus
 
@@ -100,7 +135,11 @@ public class MainActivity extends AppCompatActivity {
                 final String kilo = list.get(i).getKiloan();
                 final String harga = list.get(i).getHarga();
                 final CharSequence[] dialogItem = {"Edit", "Hapus"};
+                String selectedItem = (String) adapterView.getItemAtPosition(i);
+                showItemDialog(selectedItem);
+
                 dialog = new AlertDialog.Builder(MainActivity.this);
+
                 dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -124,6 +163,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         getData();
+    }
+
+    private void showItemDialog(String item) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("Item Dialog");
+        alertDialog.setMessage("Anda memilih item: " + item);
+        alertDialog.setIcon(android.R.drawable.ic_dialog_info);
+
+        alertDialog.setPositiveButton("Lanjutkan", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Tindakan saat tombol Lanjutkan ditekan
+                // Misalnya, intent untuk memulai aktivitas lain
+                Intent intent = new Intent(MainActivity.this, RegulerActivity.class);
+                intent.putExtra("selectedItem", item);
+                startActivity(intent);
+            }
+        });
+
+        alertDialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Tindakan saat tombol Batal ditekan
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
     }
 
     private void getData(){

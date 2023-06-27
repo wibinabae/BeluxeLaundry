@@ -33,9 +33,6 @@ public class RegulerActivity extends AppCompatActivity {
     Button btnAddData;
     private String nama, harga, kilo, id;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

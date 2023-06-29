@@ -90,40 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Object item = parent.getItemAtPosition(position);
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                builder.setTitle("Apa yang akan dilakukan?")
-//                        .setMessage("Apa yang akan kamu lakukan untuk data ini?" + item.toString())
-//                        .setIcon(R.drawable.logoapp);
-//                builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(MainActivity.this, RegulerActivity.class);
-//                        intent.putExtra("data", item.toString());
-//                        startActivity(intent);
-//                    }
-//                });
-//                builder.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Hapus Data
-//                    }
-//                });
-//            }
-//        });
-//    }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String selectedItem = (String) parent.getItemAtPosition(position);
-//                showItemDialog(selectedItem);
-//            }
-//        });
-//    }
-
 
 //        Handling untuk mengedit dan menghapus
 
@@ -135,8 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 final String kilo = list.get(i).getKiloan();
                 final String harga = list.get(i).getHarga();
                 final CharSequence[] dialogItem = {"Edit", "Hapus"};
-                String selectedItem = (String) adapterView.getItemAtPosition(i);
-                showItemDialog(selectedItem);
+                Person selectedItem = (Person) adapterView.getItemAtPosition(i);
+                String selectedName = selectedItem.getNamana();
+
+//                showItemDialog(selectedName);
 
                 dialog = new AlertDialog.Builder(MainActivity.this);
 
